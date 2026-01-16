@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حلقات الثريا</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>حلقات الثريا - غيل باوزير</title>
+    
+    <link rel="icon" type="image/png" href="1768411699920.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,135 +15,179 @@
     <div class="fixed-bg"></div>
 
     <header>
-        <div class="header-container">
-            <div class="video-box">
-                <video autoplay loop muted playsinline>
-                    <source src="1768472913710.mp4" type="video/mp4">
-                    متصفحك لا يدعم الفيديو
-                </video>
-            </div>
-
-            <div class="header-center">
-                <h1 class="main-title">حلقات الثريا</h1>
-                <p class="subtitle">تميز في حفظ كتاب الله</p>
-                <div id="verse-ticker" class="verse-ticker">جاري تحميل الآية...</div>
-            </div>
-
-            <button id="theme-toggle" class="theme-btn">🌙 ليلي</button>
+        <button class="theme-toggle" id="theme-btn">☀️ نهاري</button>
+        
+        <div class="video-container">
+            <video autoplay muted loop playsinline>
+                <source src="1768472913710.mp4" type="video/mp4">
+            </video>
+        </div>
+        
+        <div class="header-content">
+            <h1>حلقات الثريا</h1>
+            <p>لتحفيظ القرآن الكريم - غيل باوزير</p>
+            <div id="verse-ticker" class="verse-ticker"></div>
         </div>
     </header>
 
-    <nav id="sticky-nav">
-        </nav>
+    <nav id="nav-container" class="sticky-nav"></nav>
 
-    <main class="container">
+    <div class="container">
         
-        <section id="home" class="active-section">
-            <div id="news-container">
-                </div>
-            
-            <div class="card weekly-question">
-                <h3>السؤال الأسبوعي</h3>
-                <p>ما هي السورة التي تسمى "قلب القرآن"؟</p>
+        <section id="section-home" class="page-section active">
+            <h2 class="section-title">📢 آخر الأخبار</h2>
+            <div id="news-list"></div>
+
+            <h2 class="section-title">❓ السؤال الأسبوعي</h2>
+            <div class="card question-card">
+                <p><strong>سؤال الأسبوع:</strong> ما هي السورة التي تسمى "سنام القرآن"؟</p>
                 <div class="winner-box">
-                    <span>الفائز السابق:</span> <strong id="prev-winner">عبدالله أحمد</strong>
+                    <strong>🏆 الفائز السابق:</strong> <span>عمر بن علي باوزير</span>
                 </div>
             </div>
         </section>
 
-        <section id="student" style="display: none;">
-            <h2>ركن الطالب</h2>
-            
-            <div class="accordion">
-                <button class="accordion-header">خطة ختمي (حسب الجهد)</button>
-                <div class="accordion-content">
-                    <div id="step-1-days" class="calc-step">
+        <section id="section-student" class="page-section">
+            <h2 class="section-title">📖 ركن الطالب</h2>
+            <p class="subtitle">أدوات ذكية لمساعدتك في رحلة الحفظ</p>
+
+            <button class="accordion-btn">🚀 متى أختم؟ (حساب بناءً على جهدي)</button>
+            <div class="accordion-panel">
+                <div class="panel-content">
+                    <div id="step-1-days">
                         <p>كم يوماً ستحفظ في الأسبوع؟</p>
-                        <div class="btn-group" id="days-options">
-                            </div>
+                        <div id="days-options" class="btn-grid"></div>
                     </div>
-                    <div id="step-2-amount" class="calc-step" style="display:none;">
-                        <p>كم مقدار الحفظ اليومي؟</p>
-                        <div class="btn-group" id="amount-options">
-                            </div>
+
+                    <div id="step-2-amount" style="display:none;">
+                        <p>كم مقدار حفظك اليومي؟</p>
+                        <div id="amount-options" class="btn-grid"></div>
+                        
+                        <div class="custom-input-div">
+                            <input type="number" id="custom-pages" placeholder="أو اكتب عدد الصفحات (مثلاً 1.5)">
+                            <button onclick="calculateEffortCustom()">احسب</button>
+                        </div>
                     </div>
-                    <div id="result-box-effort" class="result-box" style="display:none;"></div>
+
+                    <div id="result-effort" class="calc-result"></div>
+                    <button id="reset-effort" class="reset-btn" style="display:none" onclick="resetEffortCalc()">🔄 حساب جديد</button>
                 </div>
             </div>
 
-            <div class="accordion">
-                <button class="accordion-header">دليل الختم (حسب الوقت)</button>
-                <div class="accordion-content">
-                    <div class="form-group">
-                        <label><input type="radio" name="mode" value="memorize" checked> حفظ</label>
-                        <label><input type="radio" name="mode" value="read"> قراءة</label>
+            <button class="accordion-btn">🧭 خطط لي (حساب بناءً على وقتي)</button>
+            <div class="accordion-panel">
+                <div class="panel-content">
+                    <p>متى تريد أن تختم؟</p>
+                    
+                    <div class="radio-group">
+                        <label><input type="radio" name="planType" value="حفظ" checked> حفظ</label>
+                        <label><input type="radio" name="planType" value="قراءة"> قراءة</label>
                     </div>
-                    <div class="form-group">
-                        <select id="time-unit">
-                            <option value="days">أيام</option>
-                            <option value="months">أشهر</option>
-                            <option value="years">سنوات</option>
+
+                    <div class="form-row">
+                        <select id="target-days" class="form-select"></select>
+                        <select id="target-months" class="form-select"></select>
+                        <select id="target-years" class="form-select"></select>
+                    </div>
+
+                    <div class="form-row">
+                        <label>تخطي أجزاء سابقة:</label>
+                        <select id="skipped-parts" class="form-select">
+                            <option value="0">سأبدأ من الناس (0 جزء)</option>
                         </select>
-                        <input type="number" id="time-value" placeholder="المدة (مثلاً 30)">
                     </div>
-                    <div class="form-group">
-                        <input type="number" id="juz-done" placeholder="أجزاء أتممتها (اختياري)">
-                    </div>
-                    <button class="action-btn" onclick="calculateTimePlan()">احسب الورد اليومي</button>
-                    <div id="result-box-time" class="result-box" style="display:none;"></div>
+
+                    <button class="action-btn" onclick="calculateTimePlan()">✨ اصنع خطتي</button>
+                    <div id="result-time" class="calc-result"></div>
                 </div>
             </div>
         </section>
 
-        <section id="ranks" style="display: none;">
-            <h2>لوحة الشرف</h2>
-            <div id="ranks-grid" class="cards-grid">
-                </div>
-        </section>
+        <section id="section-quiz" class="page-section">
+            <h2 class="section-title">🧠 اختبر حفظك</h2>
+            <div class="card">
+                <p>اختر نطاق الاختبار:</p>
+                <select id="quiz-juz" class="form-select" onchange="updateQuizSurahs()"></select>
+                <select id="quiz-surah" class="form-select" style="margin-top:10px"></select>
+                <select id="quiz-type" class="form-select" style="margin-top:10px">
+                    <option value="complete">أكمل الآية</option>
+                    <option value="surah_name">ما اسم السورة؟</option>
+                    <option value="ayah_num">ما رقم الآية؟</option>
+                </select>
+                <button class="action-btn" style="margin-top:15px" onclick="generateQuestion()">ابدأ السؤال</button>
+            </div>
 
-        <section id="schedule" style="display: none;">
-            <div class="schedule-controls">
-                <div class="schedule-group">
-                    <h4>حلقات العصر</h4>
-                    <div id="asr-btns" class="btn-group-small"></div>
-                </div>
-                <div class="schedule-group">
-                    <h4>حلقات المغرب</h4>
-                    <div id="maghrib-btns" class="btn-group-small"></div>
+            <div id="quiz-area" class="card" style="display:none; border-right: 4px solid var(--accent-color);">
+                <p id="question-text" style="font-size: 1.2rem; line-height: 1.8;"></p>
+                <button id="show-answer-btn" class="nav-btn small-btn" onclick="showAnswer()">إظهار الإجابة</button>
+                <div id="answer-box" style="display:none; margin-top:15px; padding-top:10px; border-top:1px dashed #ccc;">
+                    <strong id="answer-text" style="color:var(--primary-color); font-size:1.1rem;"></strong>
+                    <br><small id="answer-details" style="color:gray"></small>
                 </div>
             </div>
+        </section>
+
+        <section id="section-ranks" class="page-section">
+            <h2 class="section-title">🏆 لوحة الشرف</h2>
+            <div id="ranks-list" class="cards-grid"></div>
+        </section>
+
+        <section id="section-schedule" class="page-section">
+            <h2 class="section-title">📅 الجداول الدراسية</h2>
+            
+            <div class="schedule-group">
+                <h4>☀️ حلقات العصر</h4>
+                <div id="btns-asr" class="btn-group-wrap"></div>
+            </div>
+
+            <div class="schedule-group">
+                <h4>🌙 حلقات المغرب</h4>
+                <div id="btns-maghrib" class="btn-group-wrap"></div>
+            </div>
+
             <div id="schedule-display"></div>
+            
             <div class="card holiday-card">
-                <h3>الإجازات القادمة</h3>
-                <p>إجازة منتصف الفصل: تبدأ بتاريخ 15 رجب.</p>
+                <h3>🏖️ الإجازات الرسمية</h3>
+                <ul>
+                    <li>الجمعة (إجازة أسبوعية)</li>
+                    <li>الأعياد الرسمية</li>
+                    <li>أسبوع ما قبل الاختبارات المدرسية</li>
+                </ul>
             </div>
         </section>
 
-        <section id="teachers" style="display: none;">
-            <div id="teachers-grid" class="cards-grid"></div>
+        <section id="section-teachers" class="page-section">
+            <h2 class="section-title">👨‍🏫 هيئة التدريس</h2>
+            <div id="teachers-list" class="cards-grid"></div>
         </section>
 
-        <section id="about" style="display: none;">
+        <section id="section-about" class="page-section">
+            <h2 class="section-title">🕌 من نحن</h2>
             <div class="poetic-card">
-                <p>نحن صرح قرآني يسعى لتخريج جيل قرآني فريد</p>
-                <h2 class="quran-quote">﴾ وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا ﴿</h2>
+                <p>صرحٌ قرآني يجمع بين أصالة التحفيظ وروح التربية</p>
+                <span class="quran-quote">﴾ وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا ﴿</span>
             </div>
+            
             <div class="contact-grid">
-                <a href="#" class="contact-box whatsapp">واتساب</a>
+                <a href="https://wa.me/967777006546" class="contact-box whatsapp">واتساب</a>
                 <a href="#" class="contact-box instagram">انستقرام</a>
-                <a href="#" class="contact-box phone">اتصال</a>
+                <a href="tel:+967777006546" class="contact-box phone">اتصال</a>
                 <a href="#" class="contact-box map">الموقع</a>
             </div>
         </section>
 
-        <section id="mobile" style="display: none;">
-            <div class="card center-content">
-                <h3>تطبيق الثريا</h3>
-                <p>قريباً على متاجر التطبيقات..</p>
+        <section id="section-mobile" class="page-section">
+            <h2 class="section-title">📱 التطبيق</h2>
+            <div class="card center-text">
+                <p>جاري العمل على تطبيق "الثريا" للأندرويد والآيفون.</p>
+                <small>نسأل الله التيسير</small>
             </div>
         </section>
 
-    </main>
+    </div>
+
+    <footer>جميع الحقوق محفوظة © 2026 - حلقات الثريا</footer>
 
     <script src="script.js"></script>
 </body>
