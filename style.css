@@ -1,0 +1,218 @@
+:root {
+    /* الوضع النهاري (الافتراضي) */
+    --primary: #047857;
+    --primary-light: #34d399;
+    --accent: #fbbf24;
+    --bg-body: #f3f4f6;
+    --bg-card: #ffffff;
+    --text-main: #1f2937;
+    --text-sec: #4b5563;
+    --border-color: #e5e7eb;
+    --font-head: 'Amiri', serif;
+    --font-body: 'Cairo', sans-serif;
+    --holiday-border: #ef4444;
+}
+
+/* الوضع الليلي */
+body.dark-mode {
+    --primary: #34d399; /* تبديل للأفتح في الليلي */
+    --primary-light: #047857;
+    --bg-body: #111827;
+    --bg-card: #1f2937;
+    --text-main: #f9fafb;
+    --text-sec: #9ca3af;
+    --border-color: #374151;
+}
+
+* { box-sizing: border-box; transition: background 0.3s, color 0.3s; }
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    padding-bottom: 50px;
+}
+
+/* الخلفية الزخرفية */
+.fixed-bg {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%; height: 60%;
+    background: url('1768411699920.png') no-repeat center center;
+    background-size: contain;
+    opacity: 0.05;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* الترويسة */
+header {
+    background-color: #047857; /* ثابت دائماً */
+    color: white;
+    padding: 15px;
+}
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.video-box {
+    width: 50px; height: 50px;
+    border: 1.5px solid var(--accent);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.video-box video { width: 100%; height: 100%; object-fit: cover; }
+
+.header-center { text-align: center; flex-grow: 1; }
+.main-title { font-family: var(--font-head); margin: 0; font-size: 1.8rem; }
+.subtitle { margin: 0; font-size: 0.8rem; opacity: 0.9; }
+
+.verse-ticker {
+    margin-top: 8px;
+    font-family: var(--font-head);
+    color: var(--accent);
+    font-size: 1rem;
+    height: 25px; /* لمنع القفز */
+    animation: fadeIn 1s;
+}
+
+.theme-btn {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.5);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: var(--font-body);
+}
+
+/* القائمة اللاصقة */
+#sticky-nav {
+    position: sticky;
+    top: 0;
+    background: var(--bg-card);
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 100;
+    justify-content: center;
+}
+.nav-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--primary);
+    border-radius: 50px; /* Pill shaped */
+    background: transparent;
+    color: var(--text-main);
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: var(--font-body);
+}
+.nav-btn.active {
+    background: var(--primary);
+    color: white; /* دائماً أبيض عند التفعيل */
+}
+
+/* البطاقات والأقسام */
+.container { padding: 15px; max-width: 800px; margin: 0 auto; }
+.card {
+    background: var(--bg-card);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* تخصيصات الرئيسية */
+.weekly-question { border-right: 4px solid var(--accent); }
+.winner-box {
+    background: rgba(251, 191, 36, 0.1); /* أصفر فاتح */
+    border: 1px dashed var(--accent);
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+/* جداول الحفظ */
+.accordion { margin-bottom: 10px; }
+.accordion-header {
+    width: 100%;
+    text-align: right;
+    padding: 15px;
+    background: var(--bg-card);
+    border: none;
+    border-bottom: 2px solid var(--primary);
+    color: var(--text-main);
+    font-weight: bold;
+    cursor: pointer;
+}
+.accordion-content {
+    background: var(--bg-card);
+    padding: 15px;
+    display: none; /* يتم تفعيلها بال JS لو أردت */
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.accordion.active .accordion-content { display: block; }
+
+.btn-group { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 10px; }
+.calc-btn {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-body);
+    color: var(--text-main);
+    cursor: pointer;
+}
+.result-box {
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid var(--accent);
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* التنسيقات الأخرى */
+.rank-card { border-right: 4px solid var(--accent); }
+.holiday-card { border-right: 4px solid var(--holiday-border); }
+
+/* الجداول */
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th { background: var(--primary); color: white; padding: 8px; }
+td { padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center; }
+
+/* من نحن */
+.poetic-card {
+    background: linear-gradient(to bottom, var(--bg-card), var(--bg-body));
+    text-align: center;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.quran-quote { color: var(--primary); font-family: var(--font-head); }
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+.contact-box {
+    padding: 20px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: transform 0.1s;
+}
+.contact-box:active { transform: scale(0.95); }
+.whatsapp { background-color: #25D366; }
+.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.phone { background-color: #3b82f6; }
+.map { background-color: #ef4444; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.fade-in { animation: fadeIn 0.5s ease-in-out; }
