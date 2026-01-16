@@ -1,112 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حلقات الثريا لتحفيظ القرآن الكريم</title>
-    
-    <link rel="icon" type="image/png" href="assets/media/images/icon.png">
-    <link rel="apple-touch-icon" href="assets/media/images/icon.png">
-    <meta name="mobile-web-app-capable" content="yes">
-    
-    <link rel="manifest" href="manifest.json">
-
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-
-    <header>
-        <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">☀️ نهاري</button>
-        <div class="video-container">
-            <video autoplay muted loop playsinline>
-                <source src="assets/media/video/bg.mp4" type="video/mp4">
-            </video>
-        </div>
-        <h1>حلقات الثريا</h1>
-        <p>لتحفيظ القرآن الكريم - غيل باوزير</p>
-        
-        <div id="verse-display">
-             حيث لا يُحفظ القرآن بالألسنة فقط،<br>
-            بل تُربّى به القلوب، وتُهذَّب النفوس، وتُبنى الأرواح.<br><br>
-            <span class="quran-verse">﴿ وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا ﴾</span><br><br>
-            ومن القرآن… نبدأ، وبه… نرتقي، وعليه… نلقى الله.
-        </div>
-
-        <h2 style="color:var(--primary-color)">📞 تواصل معنا</h2>
-        <div class="contact-grid">
-            <a href="https://wa.me/967777006546" target="_blank" class="contact-box bg-whatsapp"><span class="contact-icon">💬</span><span>واتساب</span></a>
-            <a href="https://www.instagram.com/pb8.c?igsh=MWJ3YWNobGk1NmdtZQ==" target="_blank" class="contact-box bg-insta"><span class="contact-icon">📸</span><span>انستقرام</span></a>
-            <a href="tel:+967777006546" class="contact-box bg-call"><span class="contact-icon">📞</span><span>اتصال هاتفي</span></a>
-            <a href="https://maps.app.goo.gl/dRRYPVJyqh2NKMg86" target="_blank" class="contact-box bg-map"><span class="contact-icon">📍</span><span>موقع المسجد</span></a>
-        </div>
-    </header>
-
-    <main class="container">
-        <div class="card">
-            <h2>📖 اختبر حفظك</h2>
-            <div class="button-group">
-                <button onclick="newQuestion('complete')">أكمل الآية</button>
-                <button onclick="newQuestion('surah_name')">اسم السورة</button>
-                <button onclick="newQuestion('ayah_num')">رقم الآية</button>
-                <button onclick="newQuestion('which_juz')">في أي جزء؟</button>
-            </div>
-            
-            <div id="quiz-area">
-                <p id="question-text" class="question-text"></p>
-                <button id="show-answer-btn" onclick="showAnswer()">إظهار الإجابة</button>
-                <div id="answer-box" class="answer-box">
-                    <p id="answer-text"></p>
-                </div>
-            </div>
-        </div>
-
-        <button class="accordion-btn">📅 دليل الختم (حاسبة الأوراد)</button>
-        <div class="panel">
-            <div class="card">
-                <label>كم جزءاً تحفظ حالياً؟</label>
-                <select id="current-hifz"></select>
-
-                <label>كم وجهاً تستطيع حفظه يومياً؟</label>
-                <select id="daily-capacity"></select>
-
-                <label>كم يوماً للمراجعة في الأسبوع؟</label>
-                <select id="review-days">
-                    <option value="0">بدون أيام راحة</option>
-                    <option value="1">يوم واحد (الجمعة مثلاً)</option>
-                    <option value="2">يومان</option>
-                </select>
-
-                <button class="calc-btn" onclick="calculateKhatm()">احسب موعد الختم 🚀</button>
-
-                <div id="khatm-result" class="calc-result"></div>
-            </div>
-        </div>
-
-        <button class="accordion-btn">🔗 فوائد في المتشابهات</button>
-        <div class="panel">
-            <div class="card">
-                <div class="poetic-text">
-                    قُل لِلَّذِينَ في (آل عمران) رَأَوْا<br>
-                    وَقُل لِّعِبَادِي في (إبراهيم) قَدْ بَدَوْا<br>
-                    و(العنكبوت) قُل لِّعِبَادِي تَمَامُهَا<br>
-                    و(الزمر) قُلْ يَاعِبَادِ فافْهَمَنَّهَا
-                </div>
-                <div class="poetic-text">
-                    وَمَا لَكُمْ لَا تُؤْمِنُونَ (الحديد)<br>
-                    وَمَا لَكُمْ أَلَّا تُنفِقُوا (الحديد)<br>
-                    وَمَا لَكُمْ أَلَّا تَأْكُلُوا (الأنعام)<br>
-                    وَمَا لَكُمْ لَا تُقَاتِلُونَ (النساء)
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        <p>جميع الحقوق محفوظة © حلقات الثريا 2026</p>
-    </footer>
-
-    <script src="assets/js/script.js"></script>
-</body>
-</html>
